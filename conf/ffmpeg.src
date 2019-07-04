@@ -1,0 +1,7 @@
+SOURCE_URL=https://repo.jellyfin.org/releases/server/debian/jellyfin-ffmpeg_4.0.4-3-stretch_arm64.deb
+SOURCE_SUM=6344d62bf49fb4245ea7825b6c162599e694edfd4c6698389b7591cf345e4411
+SOURCE_SUM_PRG=sha256sum
+SOURCE_FORMAT=deb
+SOURCE_IN_SUBDIR=false
+SOURCE_EXTRACT=false
+SOURCE_FILENAME=jellyfin-ffmpeg_4.0.4-3-stretch_arm64.deb

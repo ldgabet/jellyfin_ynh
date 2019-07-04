@@ -97,7 +97,7 @@ ynh_print_info "Installing dependencies..."
 # Install dependencies
 ynh_install_app_dependencies apt-transport-https
 
-ynh_install_extra_app_dependencies --repo="deb https://repo.jellyfin.org/debian stretch main" --package="jellyfin-ffmpeg" --key="https://repo.jellyfin.org/debian/jellyfin_team.gpg.key"
+ynh_install_app_dependencies --repo="deb https://repo.jellyfin.org/debian stretch main" --package="jellyfin-ffmpeg" --key="https://repo.jellyfin.org/debian/jellyfin_team.gpg.key"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

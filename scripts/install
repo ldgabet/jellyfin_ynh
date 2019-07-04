@@ -82,6 +82,12 @@ yunohost firewall allow --no-upnp TCP $port 2>&1
 ynh_app_setting_set $app port $port
 
 #=================================================
+# ADD JELLYFIN REPOSITORY
+#=================================================
+
+ynh_install_extra_repo --repo="deb https://repo.jellyfin.org/debian stretch main" --key="https://repo.jellyfin.org/debian/jellyfin_team.gpg.key"
+
+#=================================================
 # INSTALL DEPENDENCIES
 #=================================================
 
@@ -95,9 +101,7 @@ ynh_print_info "Installing dependencies..."
 ###		- And the section "UPGRADE DEPENDENCIES" in the upgrade script
 
 # Install dependencies
-ynh_install_app_dependencies apt-transport-https
-
-ynh_install_app_dependencies --repo="deb https://repo.jellyfin.org/debian stretch main" --package="jellyfin-ffmpeg" --key="https://repo.jellyfin.org/debian/jellyfin_team.gpg.key"
+ynh_install_app_dependencies apt-transport-https jellyfin-ffmpeg
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

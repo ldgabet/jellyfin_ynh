@@ -25,7 +25,7 @@ ynh_setup_source "$final_path"
 # INSTALL JELLYFIN
 #==============================================
 
-dpkg --install $final_path/jellyfin_*.deb $final_path/jellyfin-ffmpeg_*.deb
+dpkg --install $final_path/jellyfin_*.deb
 
 #=================================================
 # NGINX CONFIGURATION

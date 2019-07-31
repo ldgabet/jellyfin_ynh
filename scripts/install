@@ -171,6 +171,19 @@ ynh_system_user_create $app
 # GENERIC FINALIZATION
 #=================================================
 
+#=================================================
+# SETUP SSOWAT
+#=================================================
+
+# If app is public, add url to SSOWat conf as skipped_uris
+if [ $is_public -eq 1 ]; then
+  # unprotected_uris allows SSO credentials to be passed anyway.
+  ynh_app_setting_set "$app" unprotected_uris "/"
+fi
+
+# Reload services
+systemctl reload nginx
+
 # Completing the Wizard setup of Jellyfin
 curl "http://$domain:$port/$path_url/Startup/Configuration" -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' --data 'UICulture=fr&MetadataCountryCode=FR&PreferredMetadataLanguage=fr' --compressed
 curl "http://$domain:$port/$path_url/Startup/RemoteAccess" -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' --data 'EnableRemoteAccess=true&EnableAutomaticPortMapping=true' --compressed
@@ -187,15 +200,3 @@ ynh_replace_string "__JELLYFIN_ADMIN_PASSWORD__" "$password" "/var/lib/jellyfin/
 # Restart Jellyfin
 systemctl restart jellyfin
 
-#=================================================
-# SETUP SSOWAT
-#=================================================
-
-# If app is public, add url to SSOWat conf as skipped_uris
-if [ $is_public -eq 1 ]; then
-  # unprotected_uris allows SSO credentials to be passed anyway.
-  ynh_app_setting_set "$app" unprotected_uris "/"
-fi
-
-# Reload services
-systemctl reload nginx

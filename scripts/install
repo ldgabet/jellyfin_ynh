@@ -88,7 +88,8 @@ ynh_app_setting_set $app port $port
 # ADD JELLYFIN REPOSITORY
 #=================================================
 
-ynh_install_extra_repo --repo="deb [arch=$( dpkg --print-architecture )] https://repo.jellyfin.org/debian $( lsb_release -c -s ) main" --key="https://repo.jellyfin.org/debian/jellyfin_team.gpg.key"
+# ynh_install_extra_repo --repo="deb [arch=$( dpkg --print-architecture )] https://repo.jellyfin.org/debian $( lsb_release -c -s ) main" --key="https://repo.jellyfin.org/debian/jellyfin_team.gpg.key"
+echo "deb [arch=$( dpkg --print-architecture )] https://repo.jellyfin.org/debian $( lsb_release -c -s ) main" | sudo tee /etc/apt/sources.list.d/jellyfin.list
 
 #=================================================
 # INSTALL DEPENDENCIES

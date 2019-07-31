@@ -1,7 +1,7 @@
-SOURCE_URL=https://repo.jellyfin.org/releases/server/debian/jellyfin_10.3.5-1_amd64.deb
-SOURCE_SUM=ebf991dfe119f224db46f6d0b7de02e714ba5bc3d8440c12dbd802306da5afad
+SOURCE_URL=https://repo.jellyfin.org/releases/server/debian/jellyfin_10.3.7-1_amd64.deb
+SOURCE_SUM=5bf3ead84f3ca78ebd86e9dbe66a9b8650a6fd102a1a1bd2f1b0b13f7d171b05
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=deb
 SOURCE_IN_SUBDIR=false
 SOURCE_EXTRACT=false
-SOURCE_FILENAME=jellyfin_10.3.5-1_amd64.deb
+SOURCE_FILENAME=jellyfin_10.3.7-1_amd64.deb

@@ -28,6 +28,8 @@ ynh_abort_if_errors
 # Retrieve arguments
 domain=$YNH_APP_ARG_DOMAIN
 path_url=$YNH_APP_ARG_PATH
+admin=$YNH_APP_ARG_ADMIN
+password=$YNH_APP_ARG_PASSWORD
 is_public=$YNH_APP_ARG_IS_PUBLIC
 
 ### If it's a multi-instance app, meaning it can be installed several times independently
@@ -86,7 +88,7 @@ ynh_app_setting_set $app port $port
 # ADD JELLYFIN REPOSITORY
 #=================================================
 
-ynh_install_extra_repo --repo="deb https://repo.jellyfin.org/debian stretch main" --key="https://repo.jellyfin.org/debian/jellyfin_team.gpg.key"
+ynh_install_extra_repo --repo="deb [arch=$( dpkg --print-architecture )] https://repo.jellyfin.org/debian $( lsb_release -c -s ) main" --key="https://repo.jellyfin.org/debian/jellyfin_team.gpg.key"
 
 #=================================================
 # INSTALL DEPENDENCIES
@@ -164,6 +166,25 @@ ynh_system_user_create $app
 # Set permissions to app files
 #chown -R root: /etc/loolwsd
 
+#=================================================
+# GENERIC FINALIZATION
+#=================================================
+
+# Completing the Wizard setup of Jellyfin
+curl "http://$domain:$port/$path_url/Startup/Configuration" -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' --data 'UICulture=fr&MetadataCountryCode=FR&PreferredMetadataLanguage=fr' --compressed
+curl "http://$domain:$port/$path_url/Startup/RemoteAccess" -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' --data 'EnableRemoteAccess=true&EnableAutomaticPortMapping=true' --compressed
+curl "http://$domain:$port/$path_url/Startup/Complete" -X POST --compressed
+
+# Install LDAP plugin
+curl "http://$domain:$port/$path_url/Packages/Installed/LDAP%20Authentication?updateClass=Release&AssemblyGuid=958aad66-3784-4d2a-b89a-a7b6fab6e25c&version=3.0" -X POST --compressed
+
+# Copy configuration file for LDAP auth
+cp ../conf/LDAP-Auth.xml /var/lib/jellyfin/plugins/configurations/LDAP-Auth.xml
+ynh_replace_string "__JELLYFIN_ADMIN_USER__" "$admin" "/var/lib/jellyfin/plugins/configurations/LDAP-Auth.xml"
+ynh_replace_string "__JELLYFIN_ADMIN_PASSWORD__" "$password" "/var/lib/jellyfin/plugins/configurations/LDAP-Auth.xml"
+
+# Restart Jellyfin
+systemctl restart jellyfin
 
 #=================================================
 # SETUP SSOWAT

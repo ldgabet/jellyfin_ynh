@@ -103,7 +103,7 @@ ynh_print_info "Installing dependencies..."
 ###		- And the section "UPGRADE DEPENDENCIES" in the upgrade script
 
 # Install dependencies
-# ynh_install_app_dependencies apt-transport-https jellyfin-ffmpeg
+ynh_install_app_dependencies apt-transport-https jellyfin-ffmpeg
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

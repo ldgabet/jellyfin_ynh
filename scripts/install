@@ -185,12 +185,12 @@ fi
 systemctl reload nginx
 
 # Completing the Wizard setup of Jellyfin
-curl "http://$domain/$path_url/Startup/Configuration" -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' --data 'UICulture=fr&MetadataCountryCode=FR&PreferredMetadataLanguage=fr' --compressed
-curl "http://$domain/$path_url/Startup/RemoteAccess" -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' --data 'EnableRemoteAccess=true&EnableAutomaticPortMapping=true' --compressed
-curl "http://$domain/$path_url/Startup/Complete" -X POST --compressed
+curl "http://$domain$path_url/Startup/Configuration" -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' --data 'UICulture=fr&MetadataCountryCode=FR&PreferredMetadataLanguage=fr' --compressed
+curl "http://$domain$path_url/Startup/RemoteAccess" -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' --data 'EnableRemoteAccess=true&EnableAutomaticPortMapping=true' --compressed
+curl "http://$domain$path_url/Startup/Complete" -X POST --compressed
 
 # Install LDAP plugin
-curl "http://$domain/$path_url/Packages/Installed/LDAP%20Authentication?updateClass=Release&AssemblyGuid=958aad66-3784-4d2a-b89a-a7b6fab6e25c&version=3.0" -X POST --compressed
+curl "http://$domain$path_url/Packages/Installed/LDAP%20Authentication?updateClass=Release&AssemblyGuid=958aad66-3784-4d2a-b89a-a7b6fab6e25c&version=3.0" -X POST --compressed
 
 # Copy configuration file for LDAP auth
 cp ../conf/LDAP-Auth.xml /var/lib/jellyfin/plugins/configurations/LDAP-Auth.xml

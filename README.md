@@ -7,7 +7,7 @@ Jellyfin is a fork of Emby media server that has no premium licenses or features
 
 ![](https://raw.githubusercontent.com/jellyfin/jellyfin-ux/master/branding/SVG/banner-logo-solid.svg?sanitize=true)
 
-**Shipped version:** 10.3.7-1
+**Shipped version:** 10.4.3
 
 ### Installing guide:
 
